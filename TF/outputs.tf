@@ -1,5 +1,10 @@
-output "azurerm_public_ip" {
-  value = azurerm_network_interface.windows_nic.private_ip_address
+data "azurerm_public_ip" "ansible_publicip" {
+  name                = azurerm_public_ip.ansible_publicip.name
+  resource_group_name = azurerm_resource_group.rg.name
+}
+
+output "public_ip_address" {
+  value = data.azurerm_public_ip.ansible_publicip.ip_address
 }
 output "resource_group_name" {
   value = azurerm_resource_group.rg.name
